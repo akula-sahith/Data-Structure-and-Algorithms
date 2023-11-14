@@ -1,5 +1,6 @@
 package DSA;
 import java.util.*;
+//This an internal implementation of a LinkedList
  class LL{
     private int size;
     private Node head;
@@ -20,6 +21,43 @@ import java.util.*;
             temp = temp.next;
         }
         System.out.println("null");
+    }
+    public void DeleteAtFirst(){
+        head = head.next;
+        if(head==null){
+            tail=null;
+        }        
+       
+        size--;
+    }
+    public void DeleteAtLast(){
+        Node second = getNode(size-2);
+        if(size<=1){
+            DeleteAtFirst();
+            return;
+        }
+        tail = second;
+        tail.next = null;
+        size--;
+    }
+    public Node getNode(int index){
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+    public void DeleteAtIndex(int index){
+        if(index==0){
+            DeleteAtLast();
+            return;
+        }
+        if(index==size-1){
+            DeleteAtFirst();
+            return;
+        }
+       Node prev = getNode(index-1);
+       prev.next = prev.next.next;
     }
     public void InsertAtLast(int value){
         Node node = new Node(value);
@@ -89,7 +127,15 @@ public class LinkedList {
         list.InsertAtFirst(7);
         list.InsertAtLast(8);
         list.InsertAtPosition(6, 3);
+        list.DisplayList();
+        list.DeleteAtFirst();
         System.out.println("size of list ="+" "+ list.size());
+        list.DisplayList();
+        list.DeleteAtLast();
+         System.out.println("size of list ="+" "+ list.size());
+        list.DisplayList();
+         list.DeleteAtIndex(1);
+         System.out.println("size of list ="+" "+ list.size());
         list.DisplayList();
     }
 }
