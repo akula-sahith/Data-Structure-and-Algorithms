@@ -40,6 +40,31 @@ import java.util.*;
         }
         size++;
     }
+    public void InsertAtPosition(int value,int index){
+      if(index>size||index<0){
+        if(index<0){
+            System.out.println("Index must be greater than zero");
+        }
+        else{
+            System.out.println("Index out of bounds");
+        }
+      }
+      if(index==0){
+        InsertAtFirst(value);
+        return;
+      }
+      if(index==size){
+        InsertAtLast(value);
+        return;
+      }
+      Node temp = head;
+      for (int i = 1; i < index; i++) {
+        temp = temp.next;
+      }
+      Node node = new Node(value,temp.next);
+      temp.next = node;
+      size++;
+    }
     private class Node{
         int value;
         Node next;
@@ -58,11 +83,12 @@ public class LinkedList {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
         LL list = new LL();
-        list.InsertAtFirst(5);
-        list.InsertAtFirst(4);
         list.InsertAtFirst(3);
-        list.InsertAtFirst(2);
-        list.InsertAtLast(1);
+        list.InsertAtFirst(4);
+        list.InsertAtFirst(5);
+        list.InsertAtFirst(7);
+        list.InsertAtLast(8);
+        list.InsertAtPosition(6, 3);
         System.out.println("size of list ="+" "+ list.size());
         list.DisplayList();
     }
