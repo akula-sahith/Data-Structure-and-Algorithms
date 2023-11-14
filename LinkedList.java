@@ -1,6 +1,59 @@
 package DSA;
 import java.util.*;
 //This an internal implementation of a LinkedList
+class DLL{
+    private int size;
+    private Node head;
+    
+    public int getsize(){
+        return size;
+    }
+   public void DisplayDoubly(){
+    Node start = head;
+    Node last = null;
+    System.out.println("In order");
+    while(start!=null){
+        System.out.print(start.value +"<->");
+        last = start;
+        start = start.next;
+    }
+    System.out.println();
+    System.out.println("In reverse order");
+    while(last!=null){
+        System.out.print(last.value+"<->");
+        last = last.prev;
+    }
+   }
+    public void AddAtFirst(int value){
+        Node node = new Node(value);
+        node.next = head;
+        if(head!=null){
+            head.prev = node;
+        }
+        head = node;
+        node.prev = null;
+        
+        size++;
+    }
+    private class Node{
+      int value;
+      Node next;
+      Node prev;
+    public Node(int value) {
+        this.value = value;
+    }
+    public Node(int value, Node next, Node prev) {
+        this.value = value;
+        this.next = next;
+        this.prev = prev;
+    }
+    public Node(int value, Node next) {
+        this.value = value;
+        this.next = next;
+    }
+      
+    }
+}
  class LL{
     private int size;
     private Node head;
@@ -131,7 +184,7 @@ import java.util.*;
 public class LinkedList {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
-        LL list = new LL();
+       /*  LL list = new LL();
         list.InsertAtFirst(3);
         list.InsertAtFirst(4);
         list.InsertAtFirst(5);
@@ -147,6 +200,14 @@ public class LinkedList {
         list.DisplayList();
          list.DeleteAtIndex(1);
          System.out.println("size of list ="+" "+ list.size());
-        list.DisplayList();
+        list.DisplayList();*/
+        DLL list = new DLL();
+        list.AddAtFirst(5);
+        list.AddAtFirst(4);
+        list.AddAtFirst(3);
+        list.AddAtFirst(2);
+        list.AddAtFirst(1);
+        System.out.println(list.getsize());
+        list.DisplayDoubly();
     }
 }
