@@ -78,6 +78,17 @@ import java.util.*;
         }
         size++;
     }
+    public Node FindNode(int value){
+
+     Node temp = head;
+     while(temp!=null){
+        if(temp.value==value){
+            return temp;
+        }
+        temp = temp.next;
+     }
+    return null;
+    }
     public void InsertAtPosition(int value,int index){
       if(index>size||index<0){
         if(index<0){
