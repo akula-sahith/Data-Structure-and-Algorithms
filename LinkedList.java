@@ -17,7 +17,15 @@ class DLL{
         last = start;
         start = start.next;
     }
-    System.out.println();
+    
+   }
+   public void DisplayDoublyInReverseOrder(){
+    Node start = head;
+    Node last = null;
+    while(start!=null){      
+        last = start;
+        start = start.next;
+    }
     System.out.println("In reverse order");
     while(last!=null){
         System.out.print(last.value+"<->");
@@ -209,5 +217,6 @@ public class LinkedList {
         list.AddAtFirst(1);
         System.out.println(list.getsize());
         list.DisplayDoubly();
+        list.DisplayDoublyInReverseOrder();
     }
 }
