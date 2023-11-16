@@ -19,6 +19,21 @@ class DLL{
     }
     
    }
+   public void AddAtLast(int value){
+    if(head==null){
+        Node node = new Node(value);
+        head = node;
+    }
+    Node temp = head;
+    while(temp.next!=null){
+     temp = temp.next;
+    }
+    Node node = new Node(value);
+    node.next = temp.next;
+    temp.next = node;
+    node.prev = temp;
+    size++;
+   }
    public void DisplayDoublyInReverseOrder(){
     Node start = head;
     Node last = null;
@@ -41,6 +56,20 @@ class DLL{
         head = node;
         node.prev = null;
         
+        size++;
+    }
+    public void AddAtIndex(int index,int value){
+        if(index==0){
+            AddAtFirst(value);
+        }
+        Node temp = head;
+        for (int i = 1; i < index; i++) {
+             temp = temp.next;
+        }
+        Node node = new Node(value);
+        node.next = temp.next;
+        temp.next = node;
+        node.prev = temp;
         size++;
     }
     private class Node{
@@ -215,8 +244,11 @@ public class LinkedList {
         list.AddAtFirst(3);
         list.AddAtFirst(2);
         list.AddAtFirst(1);
+        //list.AddAtIndex(1, 6);
+        list.AddAtLast(7);
+        list.AddAtIndex(5, 6);
         System.out.println(list.getsize());
         list.DisplayDoubly();
-        list.DisplayDoublyInReverseOrder();
+      //  list.DisplayDoublyInReverseOrder();
     }
 }
