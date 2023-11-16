@@ -13,7 +13,12 @@ class DLL{
     Node last = null;
     System.out.println("In order");
     while(start!=null){
+        if(start.next==null){
+            System.out.println(start.value + "->" + null);
+        }
+        else{
         System.out.print(start.value +"<->");
+        }
         last = start;
         start = start.next;
     }
