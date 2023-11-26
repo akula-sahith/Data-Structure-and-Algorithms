@@ -1,6 +1,75 @@
 package DSA;
 import java.util.*;
 //This an internal implementation of a LinkedList
+class CLL{
+    private int size=0;
+    private Node head;
+    private Node tail;
+    class Node{
+        
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+        public Node(int value) {
+            this.value = value;
+        }
+        int value;
+        Node next;
+    }
+    public void DeleteNodeWithThisValue(int value){
+        size--;
+        Node start = head;
+        if(start.value==value){
+            head = head.next;
+            tail.next = head;
+            return;
+        }
+        do{
+            Node current = start;
+            if(start.next.value==value){
+
+              start.next = start.next.next;
+              return;
+            }
+            start = start.next;
+        }while(start!=head);
+        System.out.println("The node you want to delete is not found");
+    }
+    public void Delete(int index){
+        size--;
+        Node temp = head;
+        for (int i = 1; i < index; i++) {
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+    }
+    public int getsize(){
+        return size;
+    }
+    public void DisplayCLL(){
+    Node temp = head;
+    do{
+        
+        System.out.print(temp.value + "<>");
+        temp = temp.next;
+    }while(temp!=head);
+    System.out.println(" " + "Circle continues");
+    }
+    public void Insert(int value){
+        Node node = new Node(value);
+        if(head==null){
+            head = node;
+            tail = node;
+            size++;
+            return;
+        }
+        node.next = head;
+        tail.next = node;
+        tail = node;
+        size++;
+    }
+}
 class DLL{
     private int size;
     private Node head;
@@ -48,7 +117,7 @@ class DLL{
     }
     System.out.println("In reverse order");
     while(last!=null){
-        System.out.print(last.value+"<->");
+        System.out.print(last.value+"<-->");
         last = last.prev;
     }
    }
@@ -96,7 +165,7 @@ class DLL{
       
     }
 }
- class LL{
+  class LL{
     private int size;
     private Node head;
     private Node tail;
@@ -109,6 +178,36 @@ class DLL{
     public int size(){
         return this.size;
     }
+    //Merge two sorted lists;
+   
+    public void InsertUsingRecursion(int value,int index){ 
+       recursivehelper(head, value, index, 0);
+   }
+   //Middle of the LinkedList
+   public int MiddleList(LL list){
+     Node fast = list.head;
+     Node slow = list.head;
+     while(fast.next!=null){
+        fast = fast.next.next;
+        slow = slow.next;
+     }
+
+     return slow.value;
+   }
+   public void recursivehelper(Node start,int value,int index,int i){
+    if(i==size||i>size||i<0){
+      System.out.println("Required index not found OR index out of bounds");
+      return;
+    }
+    if(i==index-1){
+        Node node = new Node(value);
+        node.next = start.next;
+        start.next = node;
+        return;
+     }
+
+     recursivehelper(start.next, value, index, i+1);
+   }
     public void DisplayList(){
         Node temp = head;
         while(temp!=null){
@@ -153,6 +252,31 @@ class DLL{
         }
        Node prev = getNode(index-1);
        prev.next = prev.next.next;
+    }
+     public LL MergeTwoLists(LL one,LL two){
+        Node l1 = one.head;
+        Node l2 = two.head;
+        LL ans = new LL();
+        while(l1!=null&&l2!=null){
+            if(l1.value<l2.value){
+                ans.InsertAtLast(l1.value);
+                l1 = l1.next;
+            }
+            else{
+                ans.InsertAtLast(l2.value);
+                l2 = l2.next;
+            }
+        }
+        while(l1!=null){
+        ans.InsertAtLast(l1.value);
+        l1 = l1.next;
+        }
+        while(l2!=null){
+        ans.InsertAtLast(l2.value);
+        l2 = l2.next;
+        }
+
+        return ans;
     }
     public void InsertAtLast(int value){
         Node node = new Node(value);
@@ -221,12 +345,12 @@ class DLL{
         }
         
     }
- 
+   
 }
 public class LinkedList {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
-       /*  LL list = new LL();
+      /*  LL list = new LL();
         list.InsertAtFirst(3);
         list.InsertAtFirst(4);
         list.InsertAtFirst(5);
@@ -243,7 +367,7 @@ public class LinkedList {
          list.DeleteAtIndex(1);
          System.out.println("size of list ="+" "+ list.size());
         list.DisplayList();*/
-        DLL list = new DLL();
+       /*  DLL list = new DLL();
         list.AddAtFirst(5);
         list.AddAtFirst(4);
         list.AddAtFirst(3);
@@ -253,7 +377,31 @@ public class LinkedList {
         list.AddAtLast(7);
         list.AddAtIndex(5, 6);
         System.out.println(list.getsize());
-        list.DisplayDoubly();
+        list.DisplayDoubly();*/
       //  list.DisplayDoublyInReverseOrder();
+   /*    CLL list = new CLL();
+      list.Insert(5);
+      list.Insert(4);
+      list.Insert(3);
+      list.Insert(2);
+      list.Insert(1);
+      //list.Delete(4);
+      list.DeleteNodeWithThisValue(5);
+      int size =list.getsize();
+      System.out.println(size);
+      list.DisplayCLL();*/
+      LL list1 = new LL();
+      LL list2 = new LL();
+      //list2.InsertAtLast(1);
+    //  list2.InsertAtLast(2);
+      list2.InsertAtLast(3);
+      list2.InsertAtLast(4);
+      list2.InsertAtLast(5);
+      list2.InsertAtLast(6);
+      list2.InsertAtLast(7);
+      int ans = list2.MiddleList(list2);
+     System.out.println(ans);
     }
+
+    
 }
