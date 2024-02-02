@@ -59,7 +59,7 @@ class BST{
             node.right = insert(value,node.right);
         }
 
-        node.height = Math.max(Height(node.left),Height(node.right));
+        node.height = Math.max(Height(node.left),Height(node.right))+1;
         return node;
     }
     public boolean isbalanced(){
